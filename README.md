@@ -59,8 +59,9 @@ The app uses environment variables to configure the database, defined in `docker
 
 - **URL**: `http://localhost:3000/installation-process`
 - **Method**: POST
-- **Description**: Installs a shop and authenticates via OAuth.
+- **Description**: Handles app installation request, authenticates to shop via Shoper Auth API & stores credentials in DB.
 
+How installation request payload looks like?
 ```json
 {
     "action": "install",
@@ -75,7 +76,7 @@ The app uses environment variables to configure the database, defined in `docker
 
 - **URL**: `http://localhost:3000/app-frontend`
 - **Method**: GET
-- **Description**: Fetches shop data by `shop_id`.
+- **Description**: Fetches shop data by `shop_id`, which is included as the GET param, when app is opened in that Shop backend.
 
 ## Testing with cURL
 
