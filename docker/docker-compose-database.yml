@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql-shop-data
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: shop_data
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - shop-network
+
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: node-shop-app
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: password
+      DB_NAME: shop_data
+    depends_on:
+      - db
+    volumes:
+      - ..:/usr/src/app
+    command: npm run dev
+    networks:
+      - shop-network
+
+volumes:
+  mysql_data:
+
+networks:
+  shop-network:
+    driver: bridge
