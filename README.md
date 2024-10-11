@@ -13,7 +13,7 @@ To get the project up and running:
 
    ```bash
    git clone https://github.com/krystianslowik/example-shoper-plugin-node-js.git
-   cd example-shoper-plugin
+   cd example-shoper-plugin-node-js
    ```
 
 2. **Navigate to the `docker` directory**:
