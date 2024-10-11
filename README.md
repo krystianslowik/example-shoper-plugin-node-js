@@ -12,7 +12,7 @@ To get the project up and running:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/krystianslowik/example-shoper-plugin.git
+   git clone https://github.com/krystianslowik/example-shoper-plugin-node-js.git
    cd example-shoper-plugin
    ```
 
