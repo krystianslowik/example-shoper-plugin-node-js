@@ -22,7 +22,7 @@ installRoute.post('/', async (req: Request, res: Response): Promise<void> => {
             `code=${encodeURIComponent(auth_code)}`,
             {
                 auth: {
-                    username: '[REDACTED]',
+                    username: '[REDACTED]',           // This is not security-breach as this app wouldn't be released. never ;)
                     password: '[REDACTED]',
                 },
                 headers: {
