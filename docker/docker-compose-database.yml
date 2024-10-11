@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     image: mysql:8.0
@@ -13,7 +11,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
-      - shop-network
+      - shoper-app-network
 
   app:
     build:
@@ -23,7 +21,7 @@ services:
     restart: always
     ports:
       - "3000:3000"
-    environment:
+    environment: 
       DB_HOST: db
       DB_PORT: 3306
       DB_USER: root
@@ -35,11 +33,11 @@ services:
       - ..:/usr/src/app
     command: npm run dev
     networks:
-      - shop-network
+      - shoper-app-network
 
 volumes:
   mysql_data:
 
 networks:
-  shop-network:
+  shoper-app-network:
     driver: bridge
