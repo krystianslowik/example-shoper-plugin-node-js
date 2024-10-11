@@ -16,9 +16,10 @@ To get the project up and running:
    cd example-shoper-plugin-node-js
    ```
 
-2. **Navigate to the `docker` directory**:
+2. **Install deps & navigate to the `docker` directory**:
 
    ```bash
+   npm i
    cd docker
    ```
 
