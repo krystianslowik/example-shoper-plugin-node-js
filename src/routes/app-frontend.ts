@@ -5,26 +5,27 @@ import { Shop } from '../entities/Shop';
 const router = Router();
 
 router.get('/', async (req: Request, res: Response): Promise<void> => {
-    const { shop } = req.query;
+  const { shop } = req.query;
 
-    if (!shop) {
-        res.status(400).json({ error: 'Missing shop parameter' });
-        return;
-    }
+  if (!shop) {
+    res.status(400).json({ error: 'Missing shop parameter' });
+    return;
+  }
 
-    const shopRepo = AppDataSource.getRepository(Shop);
+  const shopRepo = AppDataSource.getRepository(Shop);
 
-    try {
-        const shopEntry = await shopRepo.findOneBy({ shop_id: shop as string });
+  try {
+    const shopEntry = await shopRepo.findOneBy({ shop_id: shop as string });
 
-        if (shopEntry) {
-            const nonce = Date.now().toString(); // csp
+    if (shopEntry) {
+      const nonce = Date.now().toString(); // csp
 
-            res.setHeader('Content-Security-Policy',
-                `default-src 'self'; script-src 'self' 'nonce-${nonce}' https://dcsaascdn.net; style-src 'self' 'unsafe-inline';` // this crap is needed due to CSP
-            );
+      res.setHeader(
+        'Content-Security-Policy',
+        `default-src 'self'; script-src 'self' 'nonce-${nonce}' https://dcsaascdn.net; style-src 'self' 'unsafe-inline';` // this crap is needed due to CSP
+      );
 
-            res.send(`
+      res.send(`
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -72,13 +73,13 @@ router.get('/', async (req: Request, res: Response): Promise<void> => {
                 </body>
                 </html>
             `);
-        } else {
-            res.status(404).json({ error: 'Shop not found' });
-        }
-    } catch (error) {
-        console.error('Error fetching shop data:', error);
-        res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.status(404).json({ error: 'Shop not found' });
     }
+  } catch (error) {
+    console.error('Error fetching shop data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 export default router;
